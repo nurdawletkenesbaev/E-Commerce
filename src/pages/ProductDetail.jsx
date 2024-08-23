@@ -3,19 +3,21 @@ import { TbHome } from "react-icons/tb";
 import { CiDeliveryTruck } from "react-icons/ci";
 import React, { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import ReactStarsRating from 'react-awesome-stars-rating';
+import { favouriteData } from "../store/slices/pageActionSlice";
+import ProductItem from "./homeComponents/ProductItem";
 
 const ProductDetail = () => {
-
+    const dispatch = useDispatch()
     const { categories } = useSelector(state => state.category)
     const { products } = useSelector(state => state.product)
     const { pathname } = useLocation()
     const selectProduct = products.find(findItem => `/products/${findItem.slug}-${findItem.id}` === pathname)
     const selectCategory = categories.find(findItem => findItem.id === selectProduct?.categoryId)
-
+    const relatedProducts = products.filter(filterItem => filterItem.categoryId === selectCategory?.id)
     const [selectImage, setSelectImage] = useState(selectProduct?.images[0])
 
     const { ref, inView } = useInView({})
@@ -45,26 +47,26 @@ const ProductDetail = () => {
                         {selectProduct?.description}
                     </div>
                     <div className='flex flex-col sm:flex-row justify-between gap-[20px]'>
-                        <button className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-black bg-transparent border-[1px] border-black'>Add to Wishlist</button>
+                        <button onClick={() => dispatch(favouriteData(selectProduct))} className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-black bg-transparent border-[1px] border-black'>Add to Wishlist</button>
                         <button className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-white bg-black'>Add to Card</button>
                     </div>
                     <div className='flex justify-between gap-[10px]'>
                         <div className='flex flex-col sm:flex-row text-center sm:text-start justify-between gap-[10px] text-nowrap items-center'>
-                            <div className="text-gray-400  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><CiDeliveryTruck /></div>
+                            <div className="text-gray-600  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><CiDeliveryTruck /></div>
                             <div className='flex flex-col gap-[5px]'>
                                 <span className="text-[16px] text-gray-400">Free Delivery</span>
                                 <p className="text-[18px]">1-2 day</p>
                             </div>
                         </div>
                         <div className='flex flex-col sm:flex-row text-center sm:text-start justify-between gap-[10px] text-nowrap items-center'>
-                            <div className="text-gray-400  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><TbHome /></div>
+                            <div className="text-gray-600  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><TbHome /></div>
                             <div className='flex flex-col gap-[5px]'>
                                 <span className="text-[16px] text-gray-400">in Stock</span>
                                 <p className="text-[18px]">Today</p>
                             </div>
                         </div>
                         <div className='flex flex-col sm:flex-row text-center sm:text-start justify-between gap-[10px] text-nowrap items-center'>
-                            <div className="text-gray-400  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><BsPatchCheck /></div>
+                            <div className="text-gray-600  border-[1px] border-gray-400 text-[22px] rounded-md bg-gray-100 w-[50px] h-[50px] flex justify-center items-center"><BsPatchCheck /></div>
                             <div className='flex flex-col gap-[5px]'>
                                 <span className="text-[16px] text-gray-400">Guaranteed</span>
                                 <p className="text-[18px]">1 year</p>
@@ -73,8 +75,8 @@ const ProductDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-[40px]">
-                <h2 className="text-[24px] font-bold">Reviews</h2>
+            <div className="my-[40px]">
+                <h2 className="text-[23px] sm:text-[26px] font-bold">Reviews</h2>
                 <div className="flex flex-col lg:flex-row justify-between gap-[20px] mt-[20px] items-center">
                     <div className="w-[200px] flex flex-col gap-[10px] h-full items-center rounded-md bg-gray-100 py-[20px]">
                         <h1 className="text-[36px] font-bold">{selectProduct?.rating}</h1>
@@ -166,7 +168,7 @@ const ProductDetail = () => {
                                 <p className="text-[18px] sm:text-[20px] font-bold">Darcy King</p>
                                 <span className="text-[14px] sm:text-[16px] text-gray-400">23 August 2024</span>
                             </div>
-                            <ReactStarsRating  stars={5} value={3.9} className='flex' />
+                            <ReactStarsRating stars={5} value={3.9} className='flex' />
                             <p className="text-[13px] sm:text-[14px] text-gray-600">
                                 I might be the only one to say this but the camera is a little funky. Hoping it will change with a software update: otherwise, love this phone! Came in great condition
                             </p>
@@ -174,6 +176,16 @@ const ProductDetail = () => {
 
                     </div>
 
+                </div>
+            </div>
+            <div>
+                <h1 className="text-[23px] sm:text-[26px] font-bold my-[20px]">Related products</h1>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px]">
+                    {
+                        relatedProducts?.map((item, index) => {
+                            if (index < 4) return <ProductItem key={item.id} item={item} />
+                        })
+                    }
                 </div>
             </div>
         </div>

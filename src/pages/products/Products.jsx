@@ -71,12 +71,12 @@ const Products = () => {
     return (
         <div className='py-[20px] px-[7.5%] bg-[#EDEDED] flex justify-between gap-[20px] relative'>
             <div className='w-[25%] min-w-[250px] max-w-[250px] sticky top-[20px] border-[1px] bg-white  rounded-md p-[10px] max-h-[calc(100vh-110px)] min-h-[calc(100vh-110px)] lg:max-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)] overflow-y-auto'>
-
-                <div onClick={() => setSelectProducts(products)} className="w-full flex justify-between items-center mb-[10px] border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer p-[5px] rounded-sm text-[20px] font-semibold">
+                <h1 className="text-[24px] font-semibold sm:text-[27px] text-center border-b-[1px] border-black">Filter</h1>
+                <div onClick={() => setSelectProducts(products)} className="w-full flex justify-between items-center border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
                     <p>All products</p>
                 </div>
 
-                <div onClick={() => dispatch(togglePrice())} className="w-full flex justify-between items-center mb-[10px] border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer p-[5px] rounded-sm text-[20px] font-semibold">
+                <div onClick={() => dispatch(togglePrice())} className="w-full flex justify-between items-center border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
                     <p>Price</p>
                     <IoIosArrowUp className={`${isPriceFilterOpen ? '' : 'rotate-180'} duration-200`} />
                 </div>
@@ -102,7 +102,7 @@ const Products = () => {
                     </div>
                 </div>
 
-                <div onClick={() => dispatch(toggleRating())} className="w-full flex justify-between items-center mb-[10px] border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer p-[5px] rounded-sm text-[20px] font-semibold">
+                <div onClick={() => dispatch(toggleRating())} className="w-full flex justify-between items-center  border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
                     <p>By rating</p>
                     <IoIosArrowUp className={`${isRatingFilterOpen ? '' : 'rotate-180'} duration-200`} />
                 </div>
@@ -128,7 +128,7 @@ const Products = () => {
                     </div>
                 </div>
 
-                <div onClick={() => dispatch(toggleCategory())} className="w-full mt-[20px] border-b-[1px] border-gray-400 cursor-pointer flex justify-between items-center mb-[10px] hover:bg-gray-50 p-[5px] rounded-sm text-[20px] font-semibold">
+                <div onClick={() => dispatch(toggleCategory())} className="w-full border-b-[1px] border-gray-400 cursor-pointer flex justify-between items-center mb-[10px] hover:bg-gray-50 px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
                     <p>Categories</p>
                     <IoIosArrowUp className={`${isCategoryFilterOpen ? '' : 'rotate-180'} duration-200`} />
                 </div>
@@ -137,7 +137,7 @@ const Products = () => {
                         categories?.map((item) => (
                             <div key={item.id} onClick={() => byCategoryFilterProducts(item.id)} className='flex gap-[8px] h-max py-[10px] px-[5px] items-center hover:bg-gray-100 cursor-pointer rounded-sm'>
                                 <div className='flex justify-center w-[30px] h-[30px] sm:text-[28px] md:text-[30px]'>
-                                    <span className="w-full h-full text-blue-500">{eval(item.icon)()}</span>
+                                    <span className="w-full h-full text-gray-500">{eval(item.icon)()}</span>
                                 </div>
                                 <p className='text-[13px] sm:text-[14px] md:text-[15px]'>{item.title}</p>
                             </div>
@@ -154,7 +154,7 @@ const Products = () => {
             </div>
 
             <div className="w-[75%] bg-white rounded-md p-[10px] overflow-hidden relative">
-                <h1 className="mb-[10px] text-[22px] font-medium">Selected products</h1>
+                <h1 className="mb-[10px] text-[20px] font-sm">Selected products <span className="font-medium">({selectProducts.length})</span></h1>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
                     {
                         selectProducts?.map((item, index) => (
