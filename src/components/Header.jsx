@@ -17,7 +17,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/slices/pageActionSlice";
 
-
 const Header = () => {
   const {pathname} = useLocation()
   const dispatch = useDispatch()
