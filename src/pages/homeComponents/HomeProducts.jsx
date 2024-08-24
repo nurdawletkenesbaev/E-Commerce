@@ -7,7 +7,7 @@ import { selectHomeProducts } from '../../store/slices/pageActionSlice'
 
 const HomeProducts = () => {
     const dispatch = useDispatch()
-    const {selectedHomeProducts} = useSelector(state => state.pageAction)
+    const { selectedHomeProducts } = useSelector(state => state.pageAction)
     return (
         <div className='px-[7.5%]'>
             <div className='flex text-[14px] sm:text-[17px] font-bold justify-between sm:justify-start sm:gap-[30px]'>
@@ -17,13 +17,13 @@ const HomeProducts = () => {
             </div>
             <div className='mt-[30px]'>
                 {
-                    selectedHomeProducts === 'newArrivals' ? <NewArrivals/> : <></>
-                }        
+                    selectedHomeProducts === 'newArrivals' ? <NewArrivals /> : <></>
+                }
                 {
-                    selectedHomeProducts === 'bestseller' ? <Bestseller/> : <></>
-                }        
+                    selectedHomeProducts === 'bestseller' ? <Bestseller /> : <></>
+                }
                 {
-                    selectedHomeProducts === 'featuredProducts' ? <FeaturedProducts/> : <></>
+                    selectedHomeProducts === 'featuredProducts' ? <FeaturedProducts /> : <></>
                 }
             </div>
         </div>
