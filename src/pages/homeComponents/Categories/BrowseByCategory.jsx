@@ -1,3 +1,4 @@
+import { TbCategory2 } from "react-icons/tb"; 
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import React, { useRef } from 'react'
@@ -28,22 +29,10 @@ import 'swiper/css/grid';
 import { Grid, Navigation } from 'swiper/modules';
 
 const BrowseByCategory = () => {
-    const { categories } = useSelector(state => state.category)
-
-    // const swiper = useSwiper();
-
-    // const navigationPrevRef = useRef(null)
-    // const navigationNextRef = React.useRef(null)
+    const { categories, categoryLoad } = useSelector(state => state.category)
 
     const prevRef = useRef(null)
     const nextRef = useRef(null)
-
-    // var swiper = new Swiper(".mySwiper", {
-    //     navigation: {
-    //       nextEl: ".swiper-button-next",
-    //       prevEl: ".swiper-button-prev",
-    //     },
-    //   });
 
     return (
         <div className='w-[85%] mx-auto my-[80px] relative bg-white'>
@@ -101,9 +90,20 @@ const BrowseByCategory = () => {
                     }}
                 >
                     {
-                        categories.map(item => (
+                        categoryLoad ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => (
+                            <SwiperSlide key={item}>
+                                <div className='bg-[#EDEDED] animate-pulse [130px]  border-[1px] border-gray-300 rounded-md  flex flex-col  px-[10px] py-[20px] items-center text-center justify-center gap-[8px] h-max'>
+                                    <div className='flex justify-center text-[25px] sm:text-[28px] md:text-[30px]'>
+                                        <TbCategory2 />
+                                    </div>
+                                    <div className='h-[15px] w-[80px] bg-gray-300'></div>
+                                </div>
+                            </SwiperSlide>
+                        ))
+                        :
+                        categories?.map(item => (
                             <SwiperSlide key={item.id}>
-                                <div className='bg-[#EDEDED] rounded-md  flex flex-col  px-[10px] py-[20px] items-center text-center justify-center gap-[8px] h-max'>
+                                <div className='bg-[#EDEDED]  border-[1px] border-gray-300 rounded-md  flex flex-col  px-[10px] py-[20px] items-center text-center justify-center gap-[8px] h-max'>
                                     <div className='flex justify-center text-[25px] sm:text-[28px] md:text-[30px]'>
                                         {eval(item.icon)()}
                                     </div>

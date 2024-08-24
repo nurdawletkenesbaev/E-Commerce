@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     selectedHomeProducts: 'newArrivals',
     favourite: [],
-    isOpenMenu: false ,
+    basket: [],
+    basketCounter: [],
+    isOpenMenu: false,
     isPriceFilterOpen: false,
     isRatingFilterOpen: false,
     isCategoryFilterOpen: false,
@@ -17,7 +19,7 @@ const pageActionSlice = createSlice({
             state.selectedHomeProducts = action.payload
         },
         favouriteData: (state, action) => {
-            if(state.favourite.find(findItem => findItem.id === action.payload.id)){
+            if (state.favourite.find(findItem => findItem.id === action.payload.id)) {
                 state.favourite = state.favourite.filter(filterItem => filterItem.id !== action.payload.id)
             }
             else {
@@ -35,13 +37,42 @@ const pageActionSlice = createSlice({
         },
         toggleCategory: (state) => {
             state.isCategoryFilterOpen = !state.isCategoryFilterOpen
-        }
+        },
+        basketCounterData: (state, action) => {
+            state.basketCounter = action.payload.map(item => 0)
+        },
+        basketData: (state, action) => {
+            state.basketCounter = state.basketCounter.map((item, index) => {
+                if (index === action.payload) return item += 1
+                else return item
+            })
+        },
+        basketDataMinus: (state, action) => {
+            state.basketCounter = state.basketCounter.map((item, index) => {
+                if (index === action.payload && item > 1) return item -= 1
+                else return item
+            })
+        },
+        basketDeleteData: (state, action) => {
+            state.basketCounter = state.basketCounter.map((item, index) => {
+                if (index === action.payload) return 0
+                else return item
+            })
+        },
     }
 })
 
-export const { selectHomeProducts, favouriteData, toggleMenu
-             , togglePrice 
-             , toggleCategory
-             , toggleRating
-             } = pageActionSlice.actions
+export const {
+    selectHomeProducts
+    , favouriteData
+    , toggleMenu
+    , togglePrice
+    , toggleCategory
+    , toggleRating
+    , basketData
+    , basketCounterData
+    , basket
+    , basketDataMinus
+    , basketDeleteData
+} = pageActionSlice.actions
 export default pageActionSlice.reducer

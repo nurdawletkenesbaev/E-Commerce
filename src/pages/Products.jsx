@@ -2,8 +2,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from '@chakra-ui/react'
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCategory, togglePrice, toggleRating } from "../../store/slices/pageActionSlice";
-import './Products.css'
+import { toggleCategory, togglePrice, toggleRating } from "../store/slices/pageActionSlice";
 
 import { GiGamepad } from "react-icons/gi";
 import { BiCamera } from "react-icons/bi";
@@ -16,14 +15,12 @@ import { GiSmartphone } from "react-icons/gi";
 import { GiWashingMachine } from "react-icons/gi"; 
 import { BiFridge } from "react-icons/bi"; 
 import { GiVacuumCleaner } from "react-icons/gi"; 
-import ProductItem from "../homeComponents/ProductItem";
+import ProductItem from "./pageComponents/ProductItem";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/grid';
-// import 'swiper/css/effect-fade';
-// import './styles.css';
 import { Pagination, Grid } from 'swiper/modules';
 
 
@@ -69,15 +66,15 @@ const Products = () => {
         },
     };
     return (
-        <div className='py-[20px] px-[7.5%] bg-[#EDEDED] flex justify-between gap-[20px] relative'>
-            <div className='w-[25%] min-w-[250px] max-w-[250px] sticky top-[20px] border-[1px] bg-white  rounded-md p-[10px] max-h-[calc(100vh-110px)] min-h-[calc(100vh-110px)] lg:max-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)] overflow-y-auto'>
-                <h1 className="text-[24px] font-semibold sm:text-[27px] text-center border-b-[1px] border-black">Filter</h1>
+        <div className='py-[20px] px-[7.5%] bg-[#EDEDED] flex flex-col sm:flex-row justify-between gap-[20px] relative'>
+            <div className='w-full sm:w-[25%] sm:min-w-[250px] sm:max-w-[250px] sm:sticky top-[20px] border-[1px] bg-white  rounded-md p-[10px] sm:max-h-[calc(100vh-110px)] sm:min-h-[calc(100vh-110px)] lg:max-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)] overflow-y-auto px-[20px] sm:px-[10px]'>
+                <h1 className="text-[24px] py-[10px] font-semibold sm:text-[27px] text-center border-b-[1px] border-black">Filter</h1>
                 <div onClick={() => setSelectProducts(products)} className="w-full flex justify-between items-center border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
                     <p>All products</p>
                 </div>
 
                 <div onClick={() => dispatch(togglePrice())} className="w-full flex justify-between items-center border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
-                    <p>Price</p>
+                    <p>Filter by price</p>
                     <IoIosArrowUp className={`${isPriceFilterOpen ? '' : 'rotate-180'} duration-200`} />
                 </div>
                 <div className={`${isPriceFilterOpen ? 'flex flex-col' : 'hidden'} duration-200`}>
@@ -103,7 +100,7 @@ const Products = () => {
                 </div>
 
                 <div onClick={() => dispatch(toggleRating())} className="w-full flex justify-between items-center  border-b-[1px] border-gray-400 hover:bg-gray-50 cursor-pointer px-[5px] py-[10px] rounded-sm text-[20px] font-semibold">
-                    <p>By rating</p>
+                    <p>Filter by rating</p>
                     <IoIosArrowUp className={`${isRatingFilterOpen ? '' : 'rotate-180'} duration-200`} />
                 </div>
                 <div className={`${isRatingFilterOpen ? 'flex flex-col' : 'hidden'} duration-200`}>
@@ -153,9 +150,9 @@ const Products = () => {
 
             </div>
 
-            <div className="w-[75%] bg-white rounded-md p-[10px] overflow-hidden relative">
+            <div className="w-full sm:w-[75%] bg-white rounded-md p-[15px] overflow-hidden relative">
                 <h1 className="mb-[10px] text-[20px] font-sm">Selected products <span className="font-medium">({selectProducts.length})</span></h1>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
                     {
                         selectProducts?.map((item, index) => (
                             <ProductItem key={item.id} item={item} />

@@ -13,10 +13,10 @@ const HomeProducts = () => {
     // console.log(selectedHomeProducts)
     return (
         <div className='px-[7.5%]'>
-            <div className='flex justify-start gap-[30px]'>
-                <span onClick={() => dispatch(selectHomeProducts('newArrivals'))} className={`${selectedHomeProducts === 'newArrivals' ? 'border-b-[2px] border-black' : ''} cursor-pointer`}>New Arrivals</span>
-                <span onClick={() => dispatch(selectHomeProducts('bestseller'))} className={`${selectedHomeProducts === 'bestseller' ? 'border-b-[2px] border-black' : ''} cursor-pointer`}>Bestseller</span>
-                <span onClick={() => dispatch(selectHomeProducts('featuredProducts'))} className={`${selectedHomeProducts === 'featuredProducts' ? 'border-b-[2px] border-black' : ''} cursor-pointer`}>Featured Products</span>
+            <div className='flex text-[14px] sm:text-[17px] font-bold justify-between sm:justify-start sm:gap-[30px]'>
+                <span onClick={() => dispatch(selectHomeProducts('newArrivals'))} className={`${selectedHomeProducts === 'newArrivals' ? 'border-b-[1px] border-black' : ''} cursor-pointer w-max`}>New Arrivals</span>
+                <span onClick={() => dispatch(selectHomeProducts('bestseller'))} className={`${selectedHomeProducts === 'bestseller' ? 'border-b-[1px] border-black' : ''} cursor-pointer w-max`}>Bestseller</span>
+                <span onClick={() => dispatch(selectHomeProducts('featuredProducts'))} className={`${selectedHomeProducts === 'featuredProducts' ? 'border-b-[1px] border-black' : ''} cursor-pointer w-max`}>Featured Products</span>
             </div>
             <div className='mt-[30px]'>
                 {

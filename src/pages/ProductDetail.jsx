@@ -7,18 +7,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import ReactStarsRating from 'react-awesome-stars-rating';
-import { favouriteData } from "../store/slices/pageActionSlice";
-import ProductItem from "./homeComponents/ProductItem";
+import { basketData, favouriteData } from "../store/slices/pageActionSlice";
+import ProductItem from "./pageComponents/ProductItem";
 
 const ProductDetail = () => {
     const dispatch = useDispatch()
     const { categories } = useSelector(state => state.category)
     const { products } = useSelector(state => state.product)
+    const { favourite } = useSelector(state => state.pageAction)
     const { pathname } = useLocation()
     const selectProduct = products.find(findItem => `/products/${findItem.slug}-${findItem.id}` === pathname)
     const selectCategory = categories.find(findItem => findItem.id === selectProduct?.categoryId)
     const relatedProducts = products.filter(filterItem => filterItem.categoryId === selectCategory?.id)
     const [selectImage, setSelectImage] = useState(selectProduct?.images[0])
+
+    const isFavourite = favourite.find(item => item === selectProduct)
 
     const { ref, inView } = useInView({})
 
@@ -47,8 +50,8 @@ const ProductDetail = () => {
                         {selectProduct?.description}
                     </div>
                     <div className='flex flex-col sm:flex-row justify-between gap-[20px]'>
-                        <button onClick={() => dispatch(favouriteData(selectProduct))} className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-black bg-transparent border-[1px] border-black'>Add to Wishlist</button>
-                        <button className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-white bg-black'>Add to Card</button>
+                        <button onClick={() => dispatch(favouriteData(selectProduct))} className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-black bg-transparent border-[1px] border-black active:scale-95'>{isFavourite ? 'Remove from Wishlist' : 'Add to Wishlist'}</button>
+                        <button onClick={() => dispatch(basketData(products.indexOf(selectProduct)))} className='py-[7px] px-[25px] rounded-md w-full sm:w-[50%] text-white bg-black active:scale-95'>Add to Card</button>
                     </div>
                     <div className='flex justify-between gap-[10px]'>
                         <div className='flex flex-col sm:flex-row text-center sm:text-start justify-between gap-[10px] text-nowrap items-center'>

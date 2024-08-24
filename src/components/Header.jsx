@@ -13,16 +13,19 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import React from 'react'
 import logo from '../images/icons/Logo.png'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/slices/pageActionSlice";
 
 
 const Header = () => {
+  const {pathname} = useLocation()
   const dispatch = useDispatch()
   const { categories } = useSelector(state => state.category)
-  const { favourite } = useSelector(state => state.pageAction)
-  const { isOpenMenu } = useSelector(state => state.pageAction)
+  const { favourite, basketCounter,  isOpenMenu } = useSelector(state => state.pageAction)
+
+  const { products } = useSelector(state => state.product)
+  const basketData = products.filter((item, index) => basketCounter[index] !== 0)
   return (
     <header className=" sticky z-[100] top-0 bg-white lg:relative">
       <nav className="px-[7.5%] relative border-b-[1px] border-gray-400 bg-white z-20 flex justify-between gap-[30px] h-[70px] items-center">
@@ -37,11 +40,10 @@ const Header = () => {
               <BsSearch />
             </button>
           </div>
-          <div className="hidden lg:flex gap-[30px] items-center">
-            <Link to={'/'} className="text-gray-900">Home</Link>
-            <Link to={'/products'}>Products</Link>
+          <div className="hidden lg:flex gap-[30px] items-center text-[18px]">
+            <Link to={'/'} className={`${pathname === '/' ? 'text-gray-900 font-semibold' : ''} duration-300`}>Home</Link>
+            <Link to={'/products'} className={`${pathname === '/products' ? 'text-gray-900 font-semibold' : ''} duration-300`}>Products</Link>
             <Link to={'/'}>Contact Us</Link>
-            <Link to={'/'}>Blog</Link>
             <Link to={'/favourite'} className="relative">
               <AiOutlineHeart className="text-[20px] text-black font-medium" />
               <div className="absolute w-[15px] h-[15px] flex items-center justify-center bg-white top-[-7px] right-[-7px] text-[11px] text-black font-semibold border-[1px] border-black rounded-full">
@@ -51,7 +53,7 @@ const Header = () => {
             <Link to={'/basket'} className="relative">
               <AiOutlineShoppingCart className="text-[20px] text-black font-medium" />
               <div className="absolute w-[15px] h-[15px] flex items-center justify-center bg-white top-[-7px] right-[-7px] text-[11px] text-black font-semibold border-[1px] border-black rounded-full">
-                {favourite?.length}
+                {basketData?.length}
               </div>
             </Link>
           </div>
@@ -86,7 +88,6 @@ const Header = () => {
             <Link onClick={() => dispatch(toggleMenu())} to={'/'} className="hover:bg-gray-200 h-full w-full py-[10px] text-center rounded-md">Home</Link>
             <Link onClick={() => dispatch(toggleMenu())} to={'/products'} className="hover:bg-gray-200 h-full w-full py-[10px] text-center rounded-md">Products</Link>
             <Link onClick={() => dispatch(toggleMenu())} to={'/'} className="hover:bg-gray-200 h-full w-full py-[10px] text-center rounded-md">Contact Us</Link>
-            <Link onClick={() => dispatch(toggleMenu())} to={'/'} className="hover:bg-gray-200 h-full w-full py-[10px] text-center rounded-md">Blog</Link>
             <div className="flex justify-start w-full">
               <Link onClick={() => dispatch(toggleMenu())} to={'/favourite'} className="pt-[20px] rounded-md relative flex flex-col justify-center items-center hover:bg-gray-200 p-[10px] w-[50%]">
                 <AiOutlineHeart className="text-[20px] text-black font-medium" />
@@ -99,7 +100,7 @@ const Header = () => {
                 <AiOutlineShoppingCart className="text-[20px] text-black font-medium" />
                 <span>Basket</span>
                 <div className="absolute w-[15px] h-[15px] flex items-center justify-center bg-white top-[11px] right-[50%] translate-x-[20px] text-[11px] text-black font-semibold border-[1px] border-black rounded-full">
-                  {favourite?.length}
+                  {basketData?.length}
                 </div>
               </Link>
             </div>
