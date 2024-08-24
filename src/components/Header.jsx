@@ -18,20 +18,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/slices/pageActionSlice";
 
 const Header = () => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const dispatch = useDispatch()
   const { categories } = useSelector(state => state.category)
-  const { favourite, basketCounter,  isOpenMenu } = useSelector(state => state.pageAction)
-
+  const { favourite, basketCounter, isOpenMenu } = useSelector(state => state.pageAction)
   const { products } = useSelector(state => state.product)
   const basketData = products.filter((item, index) => basketCounter[index] !== 0)
+  
   return (
     <header className=" sticky z-[100] top-0 bg-white lg:relative">
       <nav className="px-[7.5%] relative border-b-[1px] border-gray-400 bg-white z-20 flex justify-between gap-[30px] h-[70px] items-center">
         <div className="bg-white">
           <img src={logo} alt="" className="w-full" />
         </div>
-
         <div className="flex justify-center gap-[30px] items-center text-[16px] text-gray-400 font-[400]">
           <div className="relative hidden sm:flex">
             <input type="text" placeholder='Search' className="py-[10px] px-[35px] border-none bg-gray-100 rounded-md outline-blue-400 text-black w-[300px]" />
@@ -61,7 +60,6 @@ const Header = () => {
               : <AiOutlineMenu />
             }
           </button>
-
         </div>
       </nav>
       <div className="bg-[#2E2E2E] hidden lg:flex justify-between  items-center py-[10px] px-[7.5%] h-[50px]">

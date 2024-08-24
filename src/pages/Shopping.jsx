@@ -68,7 +68,7 @@ const Shopping = () => {
                 <p className='text-[18px] font-semibold'>Total</p>
                 <span className='text-18px font-bold'>${total}</span>
               </div>
-              <button className='bg-black text-white py-[10px] rounded-md'>Checkout</button>
+              <button className='bg-black text-white py-[10px] rounded-md active:scale-95 duration-200'>Checkout</button>
             </div>
           </div>
       }

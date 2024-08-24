@@ -58,7 +58,7 @@ const ProductItem = ({ item }) => {
         <div className="flex justify-center flex-col">
           <span className="text-[22px] font-[600]">${item?.price}</span>
           <div>
-            <button onClick={() => dispatch(basketData(products.indexOf(item)))} className="py-[10px] px-[30px] rounded-md text-white bg-black border-none">Buy Now</button>
+            <button onClick={() => dispatch(basketData(products.indexOf(item)))} className="py-[10px] px-[30px] rounded-md text-white bg-black border-none active:scale-95 duration-200">Buy Now</button>
           </div>
         </div>
       </div>
