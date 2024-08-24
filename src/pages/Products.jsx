@@ -134,7 +134,7 @@ const Products = () => {
                         categories?.map((item) => (
                             <div key={item.id} onClick={() => byCategoryFilterProducts(item.id)} className='flex gap-[8px] h-max py-[10px] px-[5px] items-center hover:bg-gray-100 cursor-pointer rounded-sm'>
                                 <div className='flex justify-center w-[30px] h-[30px] sm:text-[28px] md:text-[30px]'>
-                                    <span className="w-full h-full text-gray-500">{eval(item.icon)()}</span>
+                                    {/* <span className="w-full h-full text-gray-500">{eval(item.icon)()}</span> */}
                                 </div>
                                 <p className='text-[13px] sm:text-[14px] md:text-[15px]'>{item.title}</p>
                             </div>

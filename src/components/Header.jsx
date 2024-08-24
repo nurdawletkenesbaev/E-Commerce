@@ -24,7 +24,7 @@ const Header = () => {
   const { favourite, basketCounter, isOpenMenu } = useSelector(state => state.pageAction)
   const { products } = useSelector(state => state.product)
   const basketData = products.filter((item, index) => basketCounter[index] !== 0)
-  
+
   return (
     <header className=" sticky z-[100] top-0 bg-white lg:relative">
       <nav className="px-[7.5%] relative border-b-[1px] border-gray-400 bg-white z-20 flex justify-between gap-[30px] h-[70px] items-center">
@@ -66,7 +66,7 @@ const Header = () => {
         {
           categories.map((item, index) => {
             if (index < 6) return <div key={item.id} className={`text-gray-400 w-full flex justify-center items-center gap-[5px] ${index === 5 ? 'border-r-[1px] ' : ''} border-l-[1px] border-gray-400`}>
-              {eval(item.icon)()}
+              {/* <span>{eval(item.icon)()}</span> */}
               <p>{item.title}</p>
             </div>
           })
