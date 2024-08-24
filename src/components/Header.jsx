@@ -76,7 +76,7 @@ const Header = () => {
         }
       </div>
 
-      <nav className={`w-full  bg-gray-50 absolute ${isOpenMenu ? 'top-[70px]' : 'top-[-340px]'} duration-200 ease-linear z-10`}>
+      <nav className={`w-full border-b-[1px] border-gray-300 bg-gray-50 absolute ${isOpenMenu ? 'top-[70px]' : 'top-[-340px]'} duration-200 ease-linear z-10`}>
         <div className="flex py-[20px] px-[7.5%] flex-col bg-gray-50 justify-center gap-[30px] items-center text-[16px] text-gray-900 font-[400]">
           <div className="relative w-full sm:hidden">
             <input type="text" placeholder='Search' className="py-[10px] px-[35px] w-full rounded-md outline-blue-400 text-black bg-gray-100 border-[1px] border-blue-400 " />
