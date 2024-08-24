@@ -1,10 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import NewArrivals from './NewArrivals'
 import Bestseller from './BestSeller'
 import FeaturedProducts from './FeaturedProducts'
-import { Provider, useDispatch, useSelector } from 'react-redux'
-import { store } from '../../store/store'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectHomeProducts } from '../../store/slices/pageActionSlice'
 
 const HomeProducts = () => {
