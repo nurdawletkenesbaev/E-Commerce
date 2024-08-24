@@ -1,6 +1,6 @@
 import React from 'react'
 import NewArrivals from './NewArrivals'
-import Bestseller from './BestSeller'
+import Bestseller from './Bestseller'
 import FeaturedProducts from './FeaturedProducts'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectHomeProducts } from '../../store/slices/pageActionSlice'
@@ -8,7 +8,6 @@ import { selectHomeProducts } from '../../store/slices/pageActionSlice'
 const HomeProducts = () => {
     const dispatch = useDispatch()
     const {selectedHomeProducts} = useSelector(state => state.pageAction)
-    // console.log(selectedHomeProducts)
     return (
         <div className='px-[7.5%]'>
             <div className='flex text-[14px] sm:text-[17px] font-bold justify-between sm:justify-start sm:gap-[30px]'>
