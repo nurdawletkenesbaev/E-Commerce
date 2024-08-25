@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
 import ReactStarsRating from 'react-awesome-stars-rating';
-import { basketData, favouriteData } from "../store/slices/pageActionSlice";
+import { basketData, favouriteData, setSelectCategory } from "../store/slices/pageActionSlice";
 import ProductItem from "./pageComponents/ProductItem";
 
 const ProductDetail = () => {
@@ -29,12 +29,12 @@ const ProductDetail = () => {
 
     return (
         <div className="px-[7.5%] py-[40px]">
-            <div className="mb-[40px] flex justify-start gap-[5px] items-center text-[20px] font-medium">
+            <div className="mb-[40px] flex flex-col md:flex-row justify-start md:gap-[5px] items-center text-[20px] font-medium">
                 <Link to={'/products'} className="text-gray-500">Products</Link>
-                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200]"/>
-                <Link to={'/products'} className="text-gray-500">{selectCategory?.title}</Link>
-                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200]"/>
-                <Link to={`/products/${selectProduct.slug}-${selectProduct.id}`}>{selectProduct.title}</Link>
+                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200] rotate-90 md:rotate-0"/>
+                <Link onClick={() => dispatch(setSelectCategory(selectCategory))} to={'/products'} className="text-gray-500">{selectCategory?.title}</Link>
+                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200] rotate-90 md:rotate-0"/>
+                <Link to={`/products/${selectProduct?.slug}-${selectProduct?.id}`}>{selectProduct?.title}</Link>
             </div>
             <div className='flex flex-col lg:flex-row justify-between gap-[20px] '>
                 <div className='flex lg:h-full flex-col-reverse sm:flex-row lg:w-[50%] justify-between gap-[20px] items-center'>

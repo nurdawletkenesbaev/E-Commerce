@@ -1,9 +1,9 @@
-import { ImSpinner2 } from "react-icons/im"; 
+import { ImSpinner2 } from "react-icons/im";
 import { IoIosArrowUp } from "react-icons/io";
 import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from '@chakra-ui/react'
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCategory, togglePrice, toggleRating } from "../store/slices/pageActionSlice";
+import { setSelectCategory, toggleCategory, togglePrice, toggleRating } from "../store/slices/pageActionSlice";
 
 import { GiGamepad } from "react-icons/gi";
 import { BiCamera } from "react-icons/bi";
@@ -29,39 +29,41 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 
 const Products = () => {
     const dispatch = useDispatch()
-    const { isPriceFilterOpen, isCategoryFilterOpen, isRatingFilterOpen } = useSelector(state => state.pageAction)
+    const { isPriceFilterOpen, isCategoryFilterOpen, isRatingFilterOpen, selectCategory } = useSelector(state => state.pageAction)
     const { products, productLoad } = useSelector(state => state.product)
     const { categories } = useSelector(state => state.category)
     const [minPrice, setMinPrice] = useState(0)
 
     const [price, setPrice] = useState([0, 300])
     const [rating, setRating] = useState([0, 5])
+    const [isFiltering, setIsFiltering] = useState(false)
 
 
     const [selectProducts, setSelectProducts] = useState(products ? products
         : products)
-    const [selectCategory, setSelectCategory] = useState('')
-    function byPriceFilterProducts(ratingValues) {
-        setSelectProducts(prev => prev.filter(item => item.rating >= ratingValues[0] && item.rating <= ratingValues[1]))
-    }
-    function byRatingFilterProducts(ratingValues) {
-        setSelectProducts(prev => prev.filter(item => item.rating >= ratingValues[0] && item.rating <= ratingValues[1]))
-    }
+
     function allProducts() {
+        dispatch(setSelectCategory(''))
         setSelectProducts(products)
-        setSelectCategory('')
     }
     function byCategoryFilterProducts(item) {
         setSelectProducts(products.filter(filterItem => filterItem.categoryId === item.id))
-        selectCategoryFunction(item)
-    }
-    function selectCategoryFunction(item) {
-        setSelectCategory(item.title)
+        dispatch(setSelectCategory(item))
     }
 
     function filter() {
-        setSelectProducts(products.filter(item => item.price >= price[0] && item.price <= price[1]))
+        setIsFiltering(true)
+        if (selectCategory === '') setSelectProducts(products.filter(item =>
+            (item.rating >= rating[0] && item.rating <= rating[1] && item.price >= price[0] && item.price <= price[1])
+        ))
+        else setSelectProducts(products.filter(item =>
+            (item.categoryId === selectCategory.id && item.rating >= rating[0] && item.rating <= rating[1] && item.price >= price[0] && item.price <= price[1])
+        ))
     }
+
+    useEffect(() => {
+        if (selectCategory !== '' && !isFiltering) setSelectProducts(products.filter(filterItem => filterItem.categoryId === selectCategory.id))
+    }, [selectProducts.length])
 
 
     const pagination = {
@@ -74,12 +76,12 @@ const Products = () => {
         <div className='py-[40px] px-[7.5%] bg-[#EDEDED]'>
 
             <div className="mb-[40px] flex justify-start gap-[5px] items-center text-[20px] font-medium">
-                <Link onClick={() => allProducts()} to={'/products'} className="text-gray-500">Products</Link>
+                <Link onClick={() => allProducts()} to={'/products'} className={`${selectCategory !== '' ? 'text-gray-500' : 'text-black'}`}>Products</Link>
                 {
                     selectCategory !== '' ?
                         <div className="flex justify-start gap-[5px] items-center">
                             <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200]" />
-                            <Link to={'/products'} className="">{selectCategory}</Link>
+                            <Link to={'/products'} className="">{selectCategory.title}</Link>
                         </div>
                         : <></>
                 }

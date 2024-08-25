@@ -9,6 +9,7 @@ const initialState = {
     isPriceFilterOpen: false,
     isRatingFilterOpen: false,
     isCategoryFilterOpen: false,
+    selectCategory: ''
 }
 
 const pageActionSlice = createSlice({
@@ -59,6 +60,9 @@ const pageActionSlice = createSlice({
                 else return item
             })
         },
+        setSelectCategory: (state, action) => {
+            state.selectCategory = action.payload
+        }
     }
 })
 
@@ -74,5 +78,6 @@ export const {
     , basket
     , basketDataMinus
     , basketDeleteData
+    , setSelectCategory
 } = pageActionSlice.actions
 export default pageActionSlice.reducer
