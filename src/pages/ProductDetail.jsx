@@ -1,10 +1,11 @@
+import { MdKeyboardArrowLeft } from "react-icons/md"; 
 import { BsPatchCheck } from "react-icons/bs";
 import { TbHome } from "react-icons/tb";
 import { CiDeliveryTruck } from "react-icons/ci";
 import React, { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import ReactStarsRating from 'react-awesome-stars-rating';
 import { basketData, favouriteData } from "../store/slices/pageActionSlice";
@@ -28,6 +29,13 @@ const ProductDetail = () => {
 
     return (
         <div className="px-[7.5%] py-[40px]">
+            <div className="mb-[40px] flex justify-start gap-[5px] items-center text-[20px] font-medium">
+                <Link to={'/products'} className="text-gray-500">Products</Link>
+                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200]"/>
+                <Link to={'/products'} className="text-gray-500">{selectCategory?.title}</Link>
+                <MdKeyboardArrowLeft className="text-[26px] mt-1 text-gray-500 font-[200]"/>
+                <Link to={`/products/${selectProduct.slug}-${selectProduct.id}`}>{selectProduct.title}</Link>
+            </div>
             <div className='flex flex-col lg:flex-row justify-between gap-[20px] '>
                 <div className='flex lg:h-full flex-col-reverse sm:flex-row lg:w-[50%] justify-between gap-[20px] items-center'>
                     <div className='lg:h-full items-center w-full sm:w-[180px] justify-center overflow-y-auto flex sm:flex-col gap-[10px]'>

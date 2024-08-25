@@ -50,7 +50,7 @@ const Shopping = () => {
               <div className='flex flex-col gap-[10px] relative'>
                 <label htmlFor="card-number" className='text-gray-600 font-[500]'>Your bonus card number</label>
                 <input type="text" id='card-number' placeholder='Enter Card Number' className='py-[12px] px-[10px] border-[1px] border-gray-400 text-gray-400 rounded-md outline-none bg-transparent' />
-                <button className='absolute bottom-[5px] right-[5px] text-black font-[500] py-[7px] px-[12px] md:px-[20px] rounded-md border-[1px] border-black bg-transparent'>Apply</button>
+                <button className='absolute bottom-[5px] right-[5px] text-black font-[500] py-[7px] px-[12px] md:px-[20px] rounded-md border-[1px] border-black bg-transparent active:scale-95'>Apply</button>
               </div>
               <div className='flex justify-between mt-[20px]'>
                 <p className='text-[18px] font-semibold'>Subtotal</p>

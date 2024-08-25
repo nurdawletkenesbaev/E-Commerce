@@ -32,10 +32,10 @@ const ProductItem = ({ item }) => {
           <BsCardImage />
         </div>
         <div className="flex  flex-col justify-between items-center w-full gap-[5px]">
-          <p className="h-[16px] w-full bg-gray-300"></p>
-          <p className="h-[16px] w-full bg-gray-300"></p>
-          <div className="flex justify-center flex-col w-full items-center gap-[5px]">
-            <div className="h-[20px] w-[50%] bg-gray-300"></div>
+          <p className="h-[12px] w-full bg-gray-300"></p>
+          <p className="h-[14px] w-full bg-gray-300"></p>
+          <div className="flex justify-center flex-col w-full items-center gap-[4px]">
+            <div className="h-[14px] w-[50%] bg-gray-300"></div>
             <div className="h-[35px] w-[80px] rounded-md bg-gray-300 border-none"></div>
           </div>
         </div>
@@ -43,7 +43,7 @@ const ProductItem = ({ item }) => {
     )
   }
   return (
-    <div ref={ref} className={`${inView ? 'top-0 opacity-100' : 'top-[30px] opacity-0'} relative duration-500 flex flex-col bg-[#EDEDED] text-center items-center py-[16px] px-[12px] rounded-[6px] h-full border-gray-300 border-[1px] `}>
+    <div ref={ref} className={`${inView ? 'top-0 opacity-100' : 'top-[30px] opacity-0'} relative duration-500 flex flex-col bg-[#EDEDED] text-center items-center py-[16px] px-[12px] rounded-[6px] min-h-[140px] h-full border-gray-300 border-[1px] `}>
       <div onClick={() => dispatch(favouriteData(item))} className="flex w-full justify-end text-[25px] cursor-pointer">
         {
           isFavourite ? <HiHeart className="hover:scale-[1.05] active:scale-95 duration-200 text-red-500" />

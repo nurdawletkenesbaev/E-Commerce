@@ -66,7 +66,7 @@ const Header = () => {
         {
           categories.map((item, index) => {
             if (index < 6) return <div key={item.id} className={`text-gray-400 w-full flex justify-center items-center gap-[5px] ${index === 5 ? 'border-r-[1px] ' : ''} border-l-[1px] border-gray-400`}>
-              {/* <span>{eval(item.icon)()}</span> */}
+              <span>{eval(item.icon)()}</span>
               <p>{item.title}</p>
             </div>
           })
