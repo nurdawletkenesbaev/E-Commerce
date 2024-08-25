@@ -104,9 +104,9 @@ const BrowseByCategory = () => {
                         categories?.map(item => (
                             <SwiperSlide key={item.id}>
                                 <div className='bg-[#EDEDED]  border-[1px] border-gray-300 rounded-md  flex flex-col  px-[10px] py-[20px] items-center text-center justify-center gap-[8px] h-max'>
-                                    <div className='flex justify-center text-[25px] sm:text-[28px] md:text-[30px]'>
+                                    {/* <div className='flex justify-center text-[25px] sm:text-[28px] md:text-[30px]'>
                                         {eval(item.icon)()}
-                                    </div>
+                                    </div> */}
                                     <p className='text-[13px] sm:text-[14px] md:text-[15px]'>{item.title}</p>
                                 </div>
                             </SwiperSlide>
