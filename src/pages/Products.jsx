@@ -32,12 +32,10 @@ const Products = () => {
     const { isPriceFilterOpen, isCategoryFilterOpen, isRatingFilterOpen, selectCategory } = useSelector(state => state.pageAction)
     const { products, productLoad } = useSelector(state => state.product)
     const { categories } = useSelector(state => state.category)
-    const [minPrice, setMinPrice] = useState(0)
 
-    const [price, setPrice] = useState([0, 300])
+    const [price, setPrice] = useState([0, 3000])
     const [rating, setRating] = useState([0, 5])
     const [isFiltering, setIsFiltering] = useState(false)
-
 
     const [selectProducts, setSelectProducts] = useState(products ? products
         : products)
@@ -65,7 +63,6 @@ const Products = () => {
         if (selectCategory !== '' && !isFiltering) setSelectProducts(products.filter(filterItem => filterItem.categoryId === selectCategory.id))
     }, [selectProducts.length])
 
-
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
@@ -74,7 +71,6 @@ const Products = () => {
     };
     return (
         <div className='py-[40px] px-[7.5%] bg-[#EDEDED]'>
-
             <div className="mb-[40px] flex justify-start gap-[5px] items-center text-[20px] font-medium">
                 <Link onClick={() => allProducts()} to={'/products'} className={`${selectCategory !== '' ? 'text-gray-500' : 'text-black'}`}>Products</Link>
                 {
@@ -110,7 +106,7 @@ const Products = () => {
                             </div>
                         </div>
                         <div className="w-full px-[5px]">
-                            <RangeSlider onChange={(value) => setPrice(value)} defaultValue={[0, 300]} min={0} max={300} step={1}>
+                            <RangeSlider onChange={(value) => setPrice(value)} defaultValue={[0, 3000]} min={0} max={3000} >
                                 <RangeSliderTrack bg='gray.400'>
                                     <RangeSliderFilledTrack bg='black' />
                                 </RangeSliderTrack>
